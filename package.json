@@ -10,8 +10,13 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/content": "^2.12.0",
+    "@nuxtjs/i18n": "^8.1.1",
     "@nuxtjs/tailwindcss": "^6.11.4",
+    "@tailwindcss/typography": "^0.5.10",
+    "express": "^4.18.2",
     "nuxt": "^3.10.2",
+    "openai": "^4.28.0",
     "vue": "^3.4.19",
     "vue-markdown-render": "^2.1.1",
     "vue-router": "^4.2.5"

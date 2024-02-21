@@ -1,0 +1,23 @@
+{
+  "support-modal.title": "支持我们 ❤",
+  "support-modal.text": "嘿你好！这个网站完全是用爱❤制作的，所以请考虑一下在Kofi上支持我们！",
+  "support-modal.support": "当然可以！",
+  "support-modal.deny": "算了，我不想...",
+  "support-modal.stop-showing-modal": "不要再显示这个窗口",
+  "navbar.input.placeholder": "把你的困扰倾诉出来...",
+  "navbar.button.text": "询问",
+  "main.loading": "加载中...",
+  "main.landing.author": "由 D & W 开发",
+  "main.landing.tips": "在输入栏中输入任何东西以询问",
+  "main.footer.org": "D & W 心理",
+  "main.footer.org_desc": "自几个月前帮助解决并预防心理问题",
+  "main.footer.built-with-love": "网站用爱❤制作",
+  "main.footer.nav.links": "链接",
+  "main.footer.nav.links.kofi-support": "在Kofi上支持我们",
+  "main.footer.nav.links.view-github": "在GitHub中查看源代码",
+  "role.user": "用户",
+  "role.assistant": "情绪帮手",
+  "locales.title": "语言",
+  "locales.en": "英语",
+  "locales.cn": "中文"
+}

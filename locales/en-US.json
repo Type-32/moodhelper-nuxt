@@ -1,0 +1,23 @@
+{
+  "support-modal.title": "Support",
+  "support-modal.text": "Hey there! This website is developed and built entirely on love ❤, so please consider supporting us on Kofi!",
+  "support-modal.support": "Yeah, sure!",
+  "support-modal.deny": "No thanks, I'm good...",
+  "support-modal.stop-showing-modal": "Don't show this window again",
+  "navbar.input.placeholder": "What's bothering you?",
+  "navbar.button.text": "Seek",
+  "main.loading": "Loading...",
+  "main.landing.author": "Developed by D & W",
+  "main.landing.tips": "Type anything in the seek input bar to seek for counsel.",
+  "main.footer.org": "D & W Psychology",
+  "main.footer.org_desc": "Assisting with solving and preventing mental issues for months on end.",
+  "main.footer.built-with-love": "Website built with Love ❤",
+  "main.footer.nav.links": "Links",
+  "main.footer.nav.links.kofi-support": "Support us on Kofi",
+  "main.footer.nav.links.view-github": "View Project on GitHub",
+  "role.user": "User",
+  "role.assistant": "MoodHelper",
+  "locales.title": "Locales",
+  "locales.en": "English",
+  "locales.cn": "Chinese"
+}
