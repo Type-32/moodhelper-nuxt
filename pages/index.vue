@@ -147,7 +147,7 @@ onBeforeMount(() => {
                     <div class="join flex flex-row flex-grow">
                         <textarea class="textarea textarea-bordered join-item w-full h-full bg-transparent" :placeholder="$t('navbar.input.placeholder')" v-model="input"/>
                         <div class="join-item">
-                            <button class="btn btn-neutral join-item h-full" @click="seek()">{{ $t('navbar.button.text') }}</button>
+                            <button class="btn btn-neutral join-item h-full" :disabled="awaitingResponse || generatingResponse || input == ''" @click="seek()">{{ $t('navbar.button.text') }}</button>
                         </div>
                     </div>
                 </div>
