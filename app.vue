@@ -7,9 +7,19 @@ const onBeforeEnter = async () => {
     await finalizePendingLocaleChange()
 }
 
+useHead({
+    title: i18n.t('role.assistant'),
+    meta: [
+        { name: 'description', content: i18n.t('role.assistant.desc') }
+    ],
+    link: [
+        { rel: 'icon', type: 'image/png', href: '/moodhelper.png' }
+    ]
+})
+
 useSeoMeta({
-    title: "MoodHelper",
-    ogTitle: "MoodHelper",
+    title: i18n.t('role.assistant'),
+    ogTitle: i18n.t('role.assistant'),
     description: i18n.t('role.assistant.desc'),
     ogDescription: i18n.t('role.assistant.desc'),
     ogImage: '/moodhelper.png',
