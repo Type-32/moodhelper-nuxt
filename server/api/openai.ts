@@ -4,7 +4,7 @@ import { OpenAI } from 'openai'
 
 export default defineEventHandler(async (event) => {
     console.log(process.env)
-
+    return 'No Access';
     const config = useRuntimeConfig();
     const requestBody = await readBody(event);
 
