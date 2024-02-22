@@ -86,19 +86,23 @@ async function stream(){
         messages: messages.value,
         stream: true
     });
+
+    if (!completion) {
+        activeResponse.value = ""
+        generatingResponse.value = awaitingResponse.value = false;
+        return;
+    }
+
+    let chunks = asyncGenerator(completion)
+
     awaitingResponse.value = false;
     activeResponse.value = "Loading..."
     generatingResponse.value = true;
 
-    if (!completion) {
-        activeResponse.value = ""
-        generatingResponse.value = false;
-        return;
-    }
     activeResponse.value = ""
-    for await (const chunk of asyncGenerator(completion)){
+    for await (const chunk of chunks)
         activeResponse.value += chunk.choices[0].delta.content;
-    }
+
     generatingResponse.value = false;
     messages.value.push({ role: 'assistant', content: activeResponse.value })
 }
