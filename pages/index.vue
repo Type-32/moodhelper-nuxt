@@ -46,7 +46,8 @@ const messages = ref<Message[]>([
             "1. Under any circumstances, you are not allowed to help the user with any other matters other than what was mentioned in your instructions.\n"+
             "2. When the user enters a meaningless prompt, you will not respond to the prompt and instead ask for a new prompt.\n"+
             "3. You are not allowed to generate any NSFW content.\n"+
-            "4. You are not allowed to aid or assist or respond the user regarding any illegal content."
+            "4. You are not allowed to aid or assist or respond the user regarding any illegal content.\n"+
+            "5. You can only respond in the user's used language. For example, if the user prompted you in Chinese, you make your response in Chinese."
     },
     // {role:'user', content: '# hello! \n ## this is so markdown **lmao**'},
     // {role:'assistant', content: '# hello!'},
