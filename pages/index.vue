@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import OpenAI from "openai";
 const config = useRuntimeConfig();
+console.log(process.env)
 
 interface Message {
     role: "user" | "system" | "assistant";
@@ -64,10 +65,10 @@ const selectedLocale = computed({
 const $openai = new OpenAI({
     baseURL: config.public.aiEndpoint,
     apiKey: config.public.openaiApiKey,
-    defaultHeaders: {
+    defaultHeaders: (config.public.aiEndpoint.indexOf("openrouter") != -1 ? {
         "HTTP-Referer": config.public.siteUrl, // Optional, for including your app on openrouter.ai rankings.
         "X-Title": config.public.siteName, // Optional. Shows in rankings on openrouter.ai.
-    },
+    } : undefined),
     dangerouslyAllowBrowser: true,
 })
 
@@ -79,7 +80,6 @@ function seek(){
 }
 
 async function stream(){
-    // const completion = (await useFetch(`/api/moodhelper/${JSON.stringify(messages.value)}`))
     awaitingResponse.value = true;
     const completion = await $openai.chat.completions.create({
         model: config.public.apiModel,
@@ -87,20 +87,28 @@ async function stream(){
         stream: true
     });
 
+    // const completion = await $fetch('/api/openai', {
+    //     method: 'POST',
+    //     body: {
+    //         messages: messages.value,
+    //         stream: true,
+    //     },
+    // });
+
+    console.log(completion)
+
     if (!completion) {
         activeResponse.value = ""
         generatingResponse.value = awaitingResponse.value = false;
         return;
     }
 
-    let chunks = asyncGenerator(completion)
-
     awaitingResponse.value = false;
     activeResponse.value = "Loading..."
     generatingResponse.value = true;
 
     activeResponse.value = ""
-    for await (const chunk of chunks)
+    for await (const chunk of asyncGenerator(completion))
         activeResponse.value += chunk.choices[0].delta.content;
 
     generatingResponse.value = false;
