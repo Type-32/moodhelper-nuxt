@@ -17,6 +17,7 @@
   "main.footer.nav.links.view-github": "View Project on GitHub",
   "role.user": "User",
   "role.assistant": "MoodHelper",
+  "role.assistant.desc": "MoodHelper is a mood-management assistance bot using Mistral AI.",
   "locales.title": "Locales",
   "locales.en": "English",
   "locales.cn": "Chinese"

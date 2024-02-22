@@ -17,6 +17,7 @@
   "main.footer.nav.links.view-github": "在GitHub中查看源代码",
   "role.user": "用户",
   "role.assistant": "情绪帮手",
+  "role.assistant.desc": "情绪帮手是一个帮助人控制情绪的AI助手，由 Mistral AI 驱动。",
   "locales.title": "语言",
   "locales.en": "英语",
   "locales.cn": "中文"

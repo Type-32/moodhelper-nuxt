@@ -140,12 +140,12 @@ onBeforeMount(() => {
         <div class="top-2 sticky items-center justify-center flex laptop:flex-none laptop:w-1/2 max-tablet:w-full z-10">
             <div class="navbar w-full gap-2 group z-10">
                 <div class="flex transition duration-300 group-hover:backdrop-blur-lg group-hover:translate-y-1 bg-base-100/70 backdrop-blur-sm rounded-box shadow-lg w-full p-2 gap-2 z-10">
-                    <select v-model="selectedLocale" class="select select-bordered h-full">
+                    <select v-model="selectedLocale" class="select select-bordered h-full bg-transparent">
                         <option value="en">{{ $t(`locales.en`) }}</option>
                         <option value="cn">{{ $t(`locales.cn`) }}</option>
                     </select>
                     <div class="join flex flex-row flex-grow">
-                        <textarea class="textarea textarea-bordered join-item w-full h-full" :placeholder="$t('navbar.input.placeholder')" v-model="input"/>
+                        <textarea class="textarea textarea-bordered join-item w-full h-full bg-transparent" :placeholder="$t('navbar.input.placeholder')" v-model="input"/>
                         <div class="join-item">
                             <button class="btn btn-neutral join-item h-full" @click="seek()">{{ $t('navbar.button.text') }}</button>
                         </div>
