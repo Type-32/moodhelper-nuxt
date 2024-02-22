@@ -20,13 +20,4 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/main.css'],
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxt/content'],
-  runtimeConfig: {
-    public:{
-      openaiApiKey: process.env.OPENAI_API_KEY,
-      apiModel: process.env.API_MODEL || 'gpt-3.5-turbo',
-      aiEndpoint: process.env.AI_ENDPOINT || 'https://api.openai.com/v1/chat/completions',
-      siteUrl: process.env.SITE_URL || '',
-      siteName: process.env.SITE_NAME || '',
-    }
-  }
 })

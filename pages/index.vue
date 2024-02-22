@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import OpenAI from "openai";
-const config = useRuntimeConfig();
-console.log(process.env)
+// console.log(process.env)
 
 interface Message {
     role: "user" | "system" | "assistant";
@@ -63,11 +62,11 @@ const selectedLocale = computed({
 })
 
 const $openai = new OpenAI({
-    baseURL: config.public.aiEndpoint,
-    apiKey: config.public.openaiApiKey,
-    defaultHeaders: (config.public.aiEndpoint.indexOf("openrouter") != -1 ? {
-        "HTTP-Referer": config.public.siteUrl, // Optional, for including your app on openrouter.ai rankings.
-        "X-Title": config.public.siteName, // Optional. Shows in rankings on openrouter.ai.
+    baseURL: process.env.AI_ENDPOINT,
+    apiKey: process.env.OPENAI_API_KEY,
+    defaultHeaders: ((process.env.AI_ENDPOINT || 'https://api.openai.com/v1/chat/completions').indexOf("openrouter") != -1 ? {
+        "HTTP-Referer": process.env.SITE_URL, // Optional, for including your app on openrouter.ai rankings.
+        "X-Title": process.env.SITE_NAME, // Optional. Shows in rankings on openrouter.ai.
     } : undefined),
     dangerouslyAllowBrowser: true,
 })
@@ -82,7 +81,7 @@ function seek(){
 async function stream(){
     awaitingResponse.value = true;
     const completion = await $openai.chat.completions.create({
-        model: config.public.apiModel,
+        model: (process.env.API_MODEL || 'gpt-3.5-turbo'),
         messages: messages.value,
         stream: true
     });

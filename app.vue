@@ -8,8 +8,8 @@ const onBeforeEnter = async () => {
 }
 
 useSeoMeta({
-    title: i18n.t('role.assistant'),
-    ogTitle: i18n.t('role.assistant'),
+    title: "MoodHelper",
+    ogTitle: "MoodHelper",
     description: i18n.t('role.assistant.desc'),
     ogDescription: i18n.t('role.assistant.desc'),
     ogImage: '/moodhelper.png',
