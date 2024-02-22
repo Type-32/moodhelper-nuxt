@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  moodhelper-nuxt:
+    container_name: moodhelper-nuxt
+    image: type32/moodhelper-nuxt:latest
+    ports:
+      - ${PANEL_PORT}:3000
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - API_MODEL=${API_MODEL}
+      - AI_ENDPOINT=${AI_ENDPOINT}
+      - SITE_URL=${SITE_URL}
+      - SITE_NAME=${SITE_NAME}
+    restart: unless-stopped
