@@ -12,7 +12,7 @@ useSeoMeta({
     ogTitle: i18n.t('role.assistant'),
     description: i18n.t('role.assistant.desc'),
     ogDescription: i18n.t('role.assistant.desc'),
-    ogImage: 'https://files.crtl-prototype-studios.cn/d/%E6%96%87%E6%A1%A3/bruh/moodhelper_icon.png',
+    ogImage: '/moodhelper.png',
     twitterCard: 'summary_large_image',
 })
 </script>
