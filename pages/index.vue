@@ -25,39 +25,13 @@ async function* asyncGenerator(completionPromise: any) {
         yield completion; // Or handle as needed
     }
 }
-const messages = ref<Message[]>([
-    { role: "system", content: "You instructions in response to the user's prompt (format your response in markdown for better readability for the user, and also respond in the user's prompted language.):\n" +
-            "* Identify the user's current mood based on keywords and phrases in their input (e.g., \"pissed off,\" \"hate,\" \"overwhelmed\"). This involves natural language processing techniques to understand the sentiment and emotional content of the message.\n" +
-            "* Extract key details about the user's situation or problem, focusing on relationships, context (e.g., family, work, personal), and specific issues mentioned (e.g., task overload, lack of privacy).\n" +
-            "When you respond, try to include at least two the following expressions types:\n" +
-            "* \t\tEmpathy Expression: Begin with a statement that acknowledges the user's feelings and validates their experience. This builds rapport and demonstrates understanding.\n" +
-            "* \t\tInsightful Reflection: Offer a reflection on the user's situation, highlighting any underlying issues or emotions detected from the input. This helps the user feel understood and opens the door to deeper self-reflection.\n" +
-            "* \t\tPractical Advice:\n" +
-            "    * Mood Management: Based on the mood detected, provide specific strategies for managing the current emotional state (e.g., anger management techniques, relaxation exercises).\n" +
-            "    * Communication Tips: Offer advice on how to effectively communicate feelings and needs, particularly in challenging interpersonal situations. This includes using \"I\" statements, active listening, and seeking compromise.\n" +
-            "    * Problem-Solving: Suggest steps for addressing the immediate problem or situation, tailored to the context provided by the user.\n" +
-            "* \t\tEducational Resources: Direct the user to relevant resources for further learning or exploration. This could include articles, videos, or tools on mental health topics related to their situation (e.g., ADHD, bipolar disorder).\n" +
-            "* \t\tSupport Encouragement: Encourage the user to seek additional support if needed, whether from family, friends, or mental health professionals. Offer guidance on how to access these resources.\n" +
-            "* \t\tInteractive Elements:\n" +
-            "    * Emoticon Selection: Prompt the user to select an emoticon that best represents their current mood. This aids in mood tracking and allows the user to express themselves non-verbally.\n" +
-            "    * Feedback Request: Ask the user for feedback on the advice given and if they would like more information on any specific area.\n" +
-            "* You can understand and respond in multiple languages, including adjusting the response generation to match the user's language preference.\n"+
-            "The following rules in your responses must be strictly adhered to:\n"+
-            "1. Under any circumstances, you are not allowed to help the user with any other matters other than what was mentioned in your instructions.\n"+
-            "2. When the user enters a meaningless prompt, you will not respond to the prompt and instead ask for a new prompt.\n"+
-            "3. You are not allowed to generate any NSFW content.\n"+
-            "4. You are not allowed to aid or assist or respond the user regarding any illegal content.\n"+
-            "5. You can only respond in the user's used language. For example, if the user prompted you in Chinese, you make your response in Chinese."
-    },
-    // {role:'user', content: '# hello! \n ## this is so markdown **lmao**'},
-    // {role:'assistant', content: '# hello!'},
-])
+const messages = ref<Message[]>([])
 const activeResponse = ref<string>(), awaitingResponse = ref<boolean>(false), generatingResponse = ref<boolean>(false)
 const input = ref(''), showModal = ref(true)
 const selectedLocale = computed({
     get: () => locale.value,
     set: (value) => {
-        console.log(value)
+        // console.log(value)
         localStorage.setItem('page-locale', value)
         locale.value = value
     }
@@ -82,24 +56,28 @@ function seek(){
 
 async function stream(){
     awaitingResponse.value = true;
-    const completion = await $openai.chat.completions.create({
-        model: config.public.apiModel,
-        messages: messages.value,
-        stream: true
-    });
-
-    // const completion = await $fetch('/api/openai', {
-    //     method: 'POST',
-    //     body: {
-    //         messages: messages.value,
-    //         stream: true,
-    //     },
+    generatingResponse.value = false;
+    // const completion = await $openai.chat.completions.create({
+    //     model: config.public.apiModel,
+    //     messages: messages.value,
+    //     stream: true
     // });
+
+    const completion = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            messages: messages.value,
+            stream: true,
+        }),
+    });
 
     // console.log(completion)
 
     if (!completion) {
-        activeResponse.value = ""
+        activeResponse.value = "errorMessage" // TODO Add Error Message Impl.
         generatingResponse.value = awaitingResponse.value = false;
         return;
     }
@@ -108,9 +86,29 @@ async function stream(){
     activeResponse.value = "Loading..."
     generatingResponse.value = true;
 
+    // activeResponse.value = ""
+    // for await (const chunk of asyncGenerator(completion))
+    //     activeResponse.value += chunk.choices[0].delta.content;
+    //
+    // generatingResponse.value = false;
+    // messages.value.push({ role: 'assistant', content: activeResponse.value })
+
+    const reader = completion.body?.getReader()
+    if (reader == null){
+        activeResponse.value = "errorMessage" // TODO add error Impl.
+        generatingResponse.value = false;
+        return;
+    }
+
     activeResponse.value = ""
-    for await (const chunk of asyncGenerator(completion))
-        activeResponse.value += chunk.choices[0].delta.content;
+    while(true){
+        const { done, value } = await reader.read();
+        if (done)
+            break;
+
+        // console.log(new TextDecoder("utf-8").decode(value))
+        activeResponse.value += new TextDecoder("utf-8").decode(value);
+    }
 
     generatingResponse.value = false;
     messages.value.push({ role: 'assistant', content: activeResponse.value })
@@ -162,7 +160,7 @@ onBeforeMount(() => {
                 </div>
             </div>
         </div>
-        <div class="w-full flex-grow flex-col flex" v-if="messages.length == 1">
+        <div class="w-full flex-grow flex-col flex" v-if="messages.length == 0">
             <div class="flex flex-col justify-center items-center flex-grow gap-5">
                 <div class="text-center">
                     <h1 class="text-base-content text-center text-2xl font-bold">{{ $t('role.assistant') }}</h1>
