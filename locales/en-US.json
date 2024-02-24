@@ -20,5 +20,9 @@
   "role.assistant.desc": "MoodHelper is a mood-management assistance bot using Mistral AI.",
   "locales.title": "Locales",
   "locales.en": "English",
-  "locales.cn": "Chinese"
+  "locales.cn": "Chinese",
+  "main.response.error": "An error occurred while generating a response. Please refresh the page. If this issue persists, please contact the site admin.",
+  "docs.coming_soon": "Coming Soon...",
+  "main.check_docs.1": "Want to use it in your own project?",
+  "main.check_docs.2": "Check out our docs!"
 }

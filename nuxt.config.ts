@@ -19,14 +19,24 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   css: ['~/assets/main.css'],
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxt/content'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-rate-limit', '@nuxtjs/i18n', '@nuxt/content'],
+  nuxtRateLimit: {
+    routes: {
+      '/api/v1/*': {
+        maxRequests: (!process.env.NUXT_API_RATE_LIMIT ? 50 : process.env.NUXT_API_RATE_LIMIT as unknown as number),
+        intervalSeconds: ((!process.env.NUXT_API_WINDOW_DURATION ? 15 * 60 : process.env.NUXT_API_WINDOW_DURATION as unknown as number * 60)),
+      },
+    },
+  },
   runtimeConfig: {
+    apiRateLimit: 50, // Default: 50 requests per min
+    apiWindowDuration: 15, // Default: 15 minutes
+    openaiApiKey: '',
     public:{
-      openaiApiKey: '',
       apiModel: 'gpt-3.5-turbo',
       aiEndpoint: 'https://api.openai.com/v1/chat/completions',
       siteUrl: '',
       siteName: '',
     }
-  }
+  },
 })

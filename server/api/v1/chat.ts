@@ -1,14 +1,21 @@
 // server/api/chat.ts
 import { defineEventHandler, readBody } from 'h3'
 import { OpenAI } from 'openai'
-import {asyncGenerator, Message, validateMessages} from "~/scripts/types";
+import {asyncGenerator, validateMessages} from "~/scripts/types";
 import {Readable} from "stream";
 
-// TODO Add rate limiting
+interface Message {
+    role: "user" | "system" | "assistant";
+    content: string;
+}
 
-// TODO Implement safe backend chat stream use and public API
 export default defineEventHandler(async (event) => {
     // console.log(process.env)
+
+    // throw createError({
+    //     status: 400,
+    //     message: 'An unknown error occurred while fetching stream response'
+    // })
 
     // It is not suggested here to change the system prompt.
     let messages: Message[] = [{ role: "system", content: "You instructions in response to the user's prompt (format your response in markdown for better readability for the user, and also respond in the user's prompted language.):\n" +
@@ -38,11 +45,11 @@ export default defineEventHandler(async (event) => {
 
     const config = useRuntimeConfig();
     const requestBody = await readBody(event);
-    console.log(requestBody.get)
+    console.log(event.toString())
 
     const openai = new OpenAI({
         baseURL: config.public.aiEndpoint,
-        apiKey: config.public.openaiApiKey,
+        apiKey: config.openaiApiKey,
         defaultHeaders: (config.public.aiEndpoint.indexOf('openrouter.ai') != -1 ? {
             "HTTP-Referer": config.public.siteUrl, // Optional, for including your app on openrouter.ai rankings.
             "X-Title": config.public.siteName, // Optional. Shows in rankings on openrouter.ai.
@@ -75,13 +82,16 @@ export default defineEventHandler(async (event) => {
                 stream.push(chunk.choices[0].delta.content);
                 // console.log(chunk.choices[0].delta.content)
             }
-            stream.push(null); // End the stream after all chunks are processed
+            stream.push(null); // End the stream
         })();
 
         return sendStream(event, stream);
     } catch (error: any) {
         // Error handling
         console.error('Error occured requesting API: ', error);
-        return { error: error.message };
+        throw createError({
+            status: error.status || 400,
+            message: error.message || 'An unknown error occurred while fetching stream response'
+        })
     }
 });
