@@ -10,9 +10,6 @@ const selectedLocale = computed({
     }
 })
 onBeforeMount(() => {
-    const dontShowSupportModal = localStorage.getItem('show-support-modal')
-    if (dontShowSupportModal) showModal.value = false;
-
     locale.value = localStorage.getItem('page-locale') || i18n.getBrowserLocale() || 'en'
 })
 </script>
