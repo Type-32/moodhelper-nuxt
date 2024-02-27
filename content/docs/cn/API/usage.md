@@ -15,7 +15,7 @@ MoodHelper API 的设计简单且易于使用。 要与 API 进行通信，您�
 
 下面是一个简化的 TypeScript 示例，可帮助您入门：
 
-```typescript
+```ts
 // Define the structure for the messages array
 interface Message {
   role: string;

@@ -25,5 +25,20 @@
   "docs.coming_soon": "敬请等待...",
   "main.check_docs.1": "想要在你自己的项目中使用吗？",
   "main.check_docs.2": "来看看我们的文档吧！",
-  "docs.nav.search_docs_placeholder": "搜索文档..."
+  "docs.nav.search_docs_placeholder": "搜索文档...",
+  "docs.roadmap.v0-1-0.title": "网页初版本部署",
+  "docs.roadmap.v0-1-0.basic_features": "基本功能",
+  "docs.roadmap.v0-1-0.moodhelper_conversations": "与情绪帮手对话",
+  "docs.roadmap.v0-1-0.public_moodhelper_api": "情绪帮手开发者API接口",
+  "docs.roadmap.v0-1-0.localization": "本地化翻译",
+  "docs.roadmap.v0-1-0.save_conversations": "保存对话",
+  "docs.roadmap.v0-1-0.sync_conversations": "多设备同步对话",
+  "docs.roadmap.v0-2-0.qol_features": "质量更新",
+  "docs.roadmap.v0-2-0.model_selection": "情绪帮手对话模型选项",
+  "docs.roadmap.v0-2-0.prompt_tweaking": "问题调整",
+  "docs.roadmap.v0-2-0.more_params": "情绪帮手API接口的更多参数",
+  "docs.roadmap.v0-2-0.title": "质量更新",
+  "docs.roadmap.more": "更多...",
+  "docs.roadmap.pending_updates": "未来计划更新",
+  "docs.roadmap.unknown": "未知"
 }

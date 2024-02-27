@@ -25,5 +25,20 @@
   "docs.coming_soon": "Coming Soon...",
   "main.check_docs.1": "Want to use it in your own project?",
   "main.check_docs.2": "Check out our docs!",
-  "docs.nav.search_docs_placeholder": "Search Docs..."
+  "docs.nav.search_docs_placeholder": "Search Docs...",
+  "docs.roadmap.v0-1-0.title": "Website Launch",
+  "docs.roadmap.v0-1-0.basic_features": "Basic Features",
+  "docs.roadmap.v0-1-0.moodhelper_conversations": "MoodHelper Conversations",
+  "docs.roadmap.v0-1-0.public_moodhelper_api": "Public MoodHelper API",
+  "docs.roadmap.v0-1-0.localization": "Localization",
+  "docs.roadmap.v0-1-0.save_conversations": "Save Conversations",
+  "docs.roadmap.v0-1-0.sync_conversations": "Sync Conversations Across Devices",
+  "docs.roadmap.v0-2-0.qol_features": "Quality-of-Life Features",
+  "docs.roadmap.v0-2-0.model_selection": "MoodHelper Response Model Selection",
+  "docs.roadmap.v0-2-0.prompt_tweaking": "Prompt Tweaking (for improved accurate results)",
+  "docs.roadmap.v0-2-0.more_params": "More parameters for MoodHelper API",
+  "docs.roadmap.v0-2-0.title": "QoL Updates",
+  "docs.roadmap.more": "More...",
+  "docs.roadmap.pending_updates": "Future Pending Updates",
+  "docs.roadmap.unknown": "unknown"
 }

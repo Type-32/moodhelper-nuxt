@@ -23,7 +23,7 @@ onBeforeMount(() => {
         <input id="docs-layout-drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
             <!-- Navbar -->
-            <div class="w-full navbar bg-base-100/70 sticky top-0 shadow-sm backdrop-blur-lg">
+            <div class="w-full navbar bg-base-100/70 sticky top-0 shadow-sm backdrop-blur-lg z-10">
                 <div class="flex-1 max-tablet:hidden">
                     <input class="input input-ghost w-1/2" :placeholder="$t('docs.nav.search_docs_placeholder')"/>
                 </div>

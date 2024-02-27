@@ -14,7 +14,7 @@ The MoodHelper API is designed to be straightforward and easy to use. To communi
 
 Here's a simplified TypeScript example to get you started:
 
-```typescript
+```ts
 // Define the structure for the messages array
 interface Message {
   role: string;
@@ -88,7 +88,7 @@ async function stream() {
 
 - **Common Errors:** Check for network issues, ensure the API endpoint URL is correct, and verify that your request body is properly formatted.
 - **Debugging:** Use `console.log` statements to debug your function and catch any errors in the try-catch block.
-- **API Rate Limits:** Be mindful of any rate limits that may apply to your usage of the API to avoid being temporarily blocked.
+- **API Rate Limits:** Be mindful of the rate limits (50 requests, 15 minute timeout) that may apply to your usage of the API to avoid being temporarily blocked.
 
 ## 📚 Further Reading
 
