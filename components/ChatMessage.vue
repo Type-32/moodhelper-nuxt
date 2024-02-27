@@ -15,7 +15,8 @@ const props = defineProps({
         type: String,
         required: true
     },
-    loading: Boolean
+    loading: Boolean,
+    generating: Boolean,
 })
 
 function copyToClipboard() {
@@ -62,6 +63,7 @@ function copyToClipboard() {
                 <span class="loading loading-dots loading-lg" v-if="props.loading">{{ $t('main.loading') }}</span>
                 <m-d-c :value="props.message" class="prose p-5 ring-1 ring-base-200 rounded-box max-w-none hover:shadow-md transition duration-300" v-else/>
             </div>
+            <div class="text-left badge" v-if="props.generating">{{ $t('main.response.generating') }}</div>
         </div>
     </div>
 </template>
