@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ChatBubble from "~/components/ChatBubble.vue";
+
 const config = useRuntimeConfig()
 // console.log(process.env)
 
@@ -150,7 +152,9 @@ onBeforeMount(() => {
             <div class="flex flex-row w-full max-w-screen" v-for="(msg, msgIndex) in messages" :key="msgIndex">
                 <ChatMessage :message="msg.content" :role="msg.role" class="flex-grow"/>
             </div>
-            <ChatMessage :message="activeResponse" :role="'assistant'" :loading="awaitingResponse" v-if="(generatingResponse || awaitingResponse) && !errorOccurred"/>
+            <ChatMessage :message="activeResponse" :role="'assistant'" :loading="awaitingResponse" :generating="generatingResponse" v-if="(generatingResponse || awaitingResponse) && !errorOccurred"/>
+
+<!--            <ChatBubble role="assistant" :message="$t('main.response.error')" :loading="awaitingResponse" :generating="generatingResponse" :error="errorOccurred" v-if="errorOccurred"/>-->
             <div role="alert" class="alert alert-error" v-if="errorOccurred">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>{{ $t('main.response.error') }}</span>

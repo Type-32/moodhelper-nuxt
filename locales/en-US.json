@@ -40,5 +40,6 @@
   "docs.roadmap.v0-2-0.title": "QoL Updates",
   "docs.roadmap.more": "More...",
   "docs.roadmap.pending_updates": "Future Pending Updates",
-  "docs.roadmap.unknown": "unknown"
+  "docs.roadmap.unknown": "unknown",
+  "main.response.generating": "Generating Response..."
 }

@@ -40,5 +40,6 @@
   "docs.roadmap.v0-2-0.title": "质量更新",
   "docs.roadmap.more": "更多...",
   "docs.roadmap.pending_updates": "未来计划更新",
-  "docs.roadmap.unknown": "未知"
+  "docs.roadmap.unknown": "未知",
+  "main.response.generating": "生成回复中..."
 }
