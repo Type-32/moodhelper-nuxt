@@ -20,6 +20,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/main.css'],
   modules: ['@nuxtjs/tailwindcss', 'nuxt-rate-limit', '@nuxtjs/i18n', '@nuxt/content'],
+  content: {
+    documentDriven: true
+  },
   nuxtRateLimit: {
     routes: {
       '/api/v1/*': {
