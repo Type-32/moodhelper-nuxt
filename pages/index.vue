@@ -68,10 +68,10 @@ async function stream(){
         if (!completion) {
             activeResponse.value = "errorMessage"
             generatingResponse.value = awaitingResponse.value = false;
-            throw new Error()
+            throw new Error("Completion response is null.")
         }
 
-        if (completion.status != 200) throw new Error()
+        if (completion.status != 200) throw new Error(`${completion.status} ${completion.statusText}`)
 
         awaitingResponse.value = false;
         activeResponse.value = "Loading..."
@@ -105,6 +105,7 @@ async function stream(){
         messages.value.push({role: 'assistant', content: activeResponse.value})
     } catch (e: any) {
         errorOccurred.value = true;
+        activeResponse.value = e?.message;
     }
 
     awaitingResponse.value = generatingResponse.value = false;
@@ -157,7 +158,7 @@ onBeforeMount(() => {
 <!--            <ChatBubble role="assistant" :message="$t('main.response.error')" :loading="awaitingResponse" :generating="generatingResponse" :error="errorOccurred" v-if="errorOccurred"/>-->
             <div role="alert" class="alert alert-error" v-if="errorOccurred">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span>{{ $t('main.response.error') }}</span>
+                <span>{{ `${$t('main.response.error')}${activeResponse}` }}</span>
             </div>
         </div>
     </div>

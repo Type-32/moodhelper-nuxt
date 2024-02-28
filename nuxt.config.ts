@@ -33,7 +33,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     apiRateLimit: 50, // Default: 50 requests per min
-    apiWindowDuration: 15, // Default: 15 minutes
+    apiWindowDuration: 2, // Default: 2 minutes
     openaiApiKey: '',
     public:{
       apiModel: 'gpt-3.5-turbo',

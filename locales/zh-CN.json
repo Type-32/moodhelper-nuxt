@@ -21,7 +21,7 @@
   "locales.title": "语言",
   "locales.en": "英语",
   "locales.cn": "中文",
-  "main.response.error": "哦不！在生成回复时遇到一个错误。请刷新该网页；若该问题持续发生，请联系站点管理员。",
+  "main.response.error": "哦不！在生成回复时遇到一个错误。请刷新该网页；若该问题持续发生，请联系站点管理员。\n错误信息: ",
   "docs.coming_soon": "敬请等待...",
   "main.check_docs.1": "想要在你自己的项目中使用吗？",
   "main.check_docs.2": "来看看我们的文档吧！",
