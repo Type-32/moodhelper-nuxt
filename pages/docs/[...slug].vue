@@ -24,6 +24,8 @@ let path;
 onBeforeMount(async () => {
     locale.value = localStorage.getItem('page-locale') || i18n.getBrowserLocale() || 'en'
     let temp = await fetchContentNavigation(queryContent('docs', locale.value))
+    console.log(temp)
+
     if (!temp)
         temp = await fetchContentNavigation(queryContent('docs','en'))
     // navigation.value = (temp?.at(0)?.children?.at(0)?.children as any)?.reverse();
@@ -36,6 +38,7 @@ onBeforeMount(async () => {
         if (!aIsPage && bIsPage) return 1;  // b (page) should come before a (directory)
         return 0; // No change in order for two items of the same type
     });
+    console.log(sorted)
 
     navigation.value = sorted;
     console.log($route.path)
