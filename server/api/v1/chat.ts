@@ -12,10 +12,10 @@ interface Message {
 export default defineEventHandler(async (event) => {
     // console.log(process.env)
 
-    throw createError({
-        status: 400,
-        message: 'An unknown error occurred while fetching stream response'
-    })
+    // throw createError({
+    //     status: 400,
+    //     message: 'An unknown error occurred while fetching stream response'
+    // })
 
     // It is not suggested here to change the system prompt.
     let messages: Message[] = [{ role: "system", content: "You instructions in response to the user's prompt (format your response in markdown for better readability for the user, and also respond in the user's prompted language.):\n" +
