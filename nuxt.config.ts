@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   css: ['~/assets/main.css'],
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-rate-limit', '@nuxtjs/i18n', '@nuxt/content'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-rate-limit', '@nuxtjs/i18n', '@nuxt/content', '@nuxtjs/sitemap'],
   content: {
     documentDriven: true
   },
