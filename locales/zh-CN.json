@@ -41,5 +41,7 @@
   "docs.roadmap.more": "更多...",
   "docs.roadmap.pending_updates": "未来计划更新",
   "docs.roadmap.unknown": "未知",
-  "main.response.generating": "生成回复中..."
+  "main.response.generating": "生成回复中...",
+  "docs.404.nonexist": "哦不！你要找的页面似乎不见了。",
+  "docs.404.buttons": "这里有些好玩的按钮："
 }
