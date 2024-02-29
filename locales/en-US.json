@@ -41,5 +41,7 @@
   "docs.roadmap.more": "More...",
   "docs.roadmap.pending_updates": "Future Pending Updates",
   "docs.roadmap.unknown": "unknown",
-  "main.response.generating": "Generating Response..."
+  "main.response.generating": "Generating Response...",
+  "docs.404.nonexist": "Uh Oh! Seems like the page you were trying to find does not exist.",
+  "docs.404.buttons": "Here are some fun buttons to play around with:"
 }

@@ -24,10 +24,8 @@ RUN npm install
 
 COPY . .
 
-RUN npm install npx
-
-RUN npx nuxi generate
+RUN npm run build
 
 EXPOSE 3000
 
-CMD [ "npx", "serve", ".output/public" ]
+CMD [ "npm", "run", "preview" ]

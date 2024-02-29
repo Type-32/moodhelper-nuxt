@@ -6,31 +6,33 @@ definePageMeta({
 import DocumentationLayout from "~/layouts/DocumentationLayout.vue";
 import PageFooter from "~/components/PageFooter.vue";
 const { page } = useContent()
-const $route = useRoute()
+const $route = useRoute(), $router = useRouter()
 
 const i18n = useI18n()
 const { locale, locales, setLocale } = useI18n()
-const selectedLocale = computed({
-    get: () => locale.value,
-    set: (value) => {
-        // console.log(value)
-        localStorage.setItem('page-locale', value)
-        locale.value = value
-    }
-})
 
 const navigation = ref();
 let path;
+
 onBeforeMount(async () => {
     locale.value = localStorage.getItem('page-locale') || i18n.getBrowserLocale() || 'en'
-    let temp = await fetchContentNavigation(queryContent('docs', locale.value))
-    console.log(temp)
+    await getContentPaths();
+})
 
-    if (!temp)
-        temp = await fetchContentNavigation(queryContent('docs','en'))
-    // navigation.value = (temp?.at(0)?.children?.at(0)?.children as any)?.reverse();
+async function getContentPaths(){
+    const {data: temp, error} = await useAsyncData(async () => await fetchContentNavigation(queryContent('docs', locale.value)))
 
-    const sorted = (temp?.at(0)?.children?.at(0)?.children as any)?.sort((a: any, b: any) => {
+    path = $route.path
+
+    watchEffect(() => {
+        if (temp.value) {
+            navigation.value = processNavigation(temp); // Assuming you have a function to process or sort data
+        }
+    });
+}
+
+function processNavigation(value: any){
+    return (value.value?.at(0)?.children?.at(0)?.children as any)?.sort((a: any, b: any) => {
         const aIsPage = !a.children;
         const bIsPage = !b.children;
 
@@ -38,19 +40,51 @@ onBeforeMount(async () => {
         if (!aIsPage && bIsPage) return 1;  // b (page) should come before a (directory)
         return 0; // No change in order for two items of the same type
     });
-    console.log(sorted)
+}
 
-    navigation.value = sorted;
-    console.log($route.path)
-    path = $route.path
-})
-
+watch(locale, async () => {
+    await getContentPaths()
+    let end: string = ""
+    $route.fullPath.split('/').slice(3, $route.params.slug.length+2).forEach((str) => {
+        end += `/${str}`
+    })
+    $router.push(`/docs/${locale.value}${end || 'getting-started'}`)
+    // reloadNuxtApp()
+});
 </script>
 
 <template>
     <DocumentationLayout :navigation="navigation">
         <article class="prose px-10 py-10 max-w-none">
-            <ContentDoc :path="path"/>
+            <ContentDoc :path="path">
+                <template #not-found>
+                    <div role="alert" class="alert alert-error flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>{{ $t('docs.404.nonexist') }}</span>
+                    </div>
+                    <div class="mockup-window border border-base-300 mt-4">
+                        <div class="p-5 flex-col flex justify-center gap-3">
+                            <div class="flex justify-center">{{ $t('docs.404.buttons') }}</div>
+                            <div class="flex justify-center gap-2">
+                                <input type="radio" name="radio-2" class="radio radio-primary" checked />
+                                <input type="radio" name="radio-2" class="radio radio-primary" />
+                                <input type="radio" name="radio-2" class="radio radio-primary" />
+                                <input type="radio" name="radio-2" class="radio radio-primary" />
+                                <input type="radio" name="radio-2" class="radio radio-primary" />
+                                <input type="radio" name="radio-2" class="radio radio-primary" />
+                            </div>
+                            <div class="flex justify-center gap-2">
+                                <input type="radio" name="radio-3" class="radio radio-secondary" checked />
+                                <input type="radio" name="radio-3" class="radio radio-secondary" />
+                                <input type="radio" name="radio-3" class="radio radio-secondary" />
+                                <input type="radio" name="radio-3" class="radio radio-secondary" />
+                                <input type="radio" name="radio-3" class="radio radio-secondary" />
+                                <input type="radio" name="radio-3" class="radio radio-secondary" />
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </ContentDoc>
         </article>
 <!--        <PageFooter/>-->
     </DocumentationLayout>
