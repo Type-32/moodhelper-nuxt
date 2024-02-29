@@ -13,9 +13,9 @@ function stopShowingModal(){
 }
 
 useHead({
-    title: i18n.t('role.assistant'),
+    title: 'MoodHelper',
     meta: [
-        { name: 'description', content: i18n.t('role.assistant.desc') }
+        { name: 'description', content: "MoodHelper is a mood-management assistance bot using Mistral AI." }
     ],
     link: [
         { rel: 'icon', type: 'image/png', href: '/moodhelper.png' }
@@ -23,10 +23,10 @@ useHead({
 })
 
 useSeoMeta({
-    title: i18n.t('role.assistant'),
-    ogTitle: i18n.t('role.assistant'),
-    description: i18n.t('role.assistant.desc'),
-    ogDescription: i18n.t('role.assistant.desc'),
+    title: "MoodHelper",
+    ogTitle: "MoodHelper",
+    description: "MoodHelper is a mood-management assistance bot using Mistral AI.",
+    ogDescription: "MoodHelper is a mood-management assistance bot using Mistral AI.",
     ogImage: '/moodhelper.png',
     twitterCard: 'summary_large_image',
 })
