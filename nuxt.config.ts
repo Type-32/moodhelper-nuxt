@@ -42,4 +42,10 @@ export default defineNuxtConfig({
       siteName: '',
     }
   },
+  nitro: {
+    prerender: {
+      // Workaround for "Error: [404] Page not found: /manifest.json"
+      failOnError: false,
+    },
+  },
 })
