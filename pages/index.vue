@@ -1,4 +1,24 @@
 <script setup lang="ts">
+
+useHead({
+    title: 'MoodHelper',
+    meta: [
+        { name: 'description', content: "MoodHelper is a mood-management assistance bot using Mistral AI." }
+    ],
+    link: [
+        { rel: 'icon', type: 'image/png', href: '/moodhelper.png' }
+    ]
+})
+
+useSeoMeta({
+    title: "MoodHelper",
+    ogTitle: "MoodHelper",
+    description: "MoodHelper is a mood-management assistance bot using Mistral AI.",
+    ogDescription: "MoodHelper is a mood-management assistance bot using Mistral AI.",
+    ogImage: '/moodhelper.png',
+    twitterCard: 'summary_large_image',
+})
+
 import ChatBubble from "~/components/ChatBubble.vue";
 
 const config = useRuntimeConfig()

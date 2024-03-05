@@ -3,6 +3,25 @@ definePageMeta({
     middleware: 'documentation'
 })
 
+useHead({
+    title: 'MoodHelper Docs',
+    meta: [
+        { name: 'description', content: "Documentation for MoodHelper." }
+    ],
+    link: [
+        { rel: 'icon', type: 'image/png', href: '/moodhelper.png' }
+    ]
+})
+
+useSeoMeta({
+    title: "MoodHelper Docs",
+    ogTitle: "MoodHelper Docs",
+    description: "Documentation for MoodHelper.",
+    ogDescription: "Documentation for MoodHelper.",
+    ogImage: '/moodhelper.png',
+    twitterCard: 'summary_large_image',
+})
+
 import DocumentationLayout from "~/layouts/DocumentationLayout.vue";
 import PageFooter from "~/components/PageFooter.vue";
 const { page } = useContent()
