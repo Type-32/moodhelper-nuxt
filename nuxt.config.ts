@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   i18n: {
     vueI18n: './i18n.config.ts',
@@ -41,11 +42,5 @@ export default defineNuxtConfig({
       siteUrl: '',
       siteName: '',
     }
-  },
-  nitro: {
-    prerender: {
-      // Workaround for "Error: [404] Page not found: /manifest.json"
-      failOnError: false,
-    },
-  },
+  }
 })

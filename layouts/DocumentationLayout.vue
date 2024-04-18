@@ -2,6 +2,13 @@
 const props = defineProps({
     navigation: Array
 })
+
+const listprop = ref([
+    {title:"Getting Started",_path:"/docs/en/getting-started"},
+    {title:"Development Roadmap",_path:"/docs/en/roadmap"},
+    {title:"API",_path:"/docs/en/api",children:[{title:"API Usage",_path:"/docs/en/api/usage"}],icon:"💻"},
+    {title:"Self-Hosted",_path:"/docs/en/selfhosted",children:[{title:"Install via Docker",_path:"/docs/en/selfhosted/install-via-docker"}],icon:"☁️"}
+])
 const i18n = useI18n()
 const { locale, locales, setLocale } = useI18n()
 const selectedLocale = computed({
@@ -65,7 +72,7 @@ onBeforeMount(() => {
                     <h1 class="text-2xl font-bold">MoodHelper</h1>
                 </a>
             </div>
-            <MenuTreeLister class="menu p-4 bg-base-100 w-full max-tablet:w-1/3 max-h-screen max-tablet:min-h-full" :list="props.navigation"/>
+            <MenuTreeLister class="menu p-4 bg-base-100 w-full max-tablet:w-1/3 max-h-screen max-tablet:min-h-full" :list="listprop"/>
         </div>
     </div>
 </template>

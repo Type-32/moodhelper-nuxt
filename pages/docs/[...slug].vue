@@ -46,6 +46,7 @@ async function getContentPaths(){
     watchEffect(() => {
         if (temp.value) {
             navigation.value = processNavigation(temp); // Assuming you have a function to process or sort data
+            // console.log(JSON.stringify(navigation.value))
         }
     });
 }
@@ -74,6 +75,7 @@ watch(locale, async () => {
 
 <template>
     <DocumentationLayout :navigation="navigation">
+<!--        <div>{{navigation}}</div>-->
         <article class="prose px-10 py-10 max-w-none">
             <ContentDoc :path="path">
                 <template #not-found>
