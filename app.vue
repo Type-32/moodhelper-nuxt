@@ -1,60 +1,77 @@
 <script setup lang="ts">
-const config = useRuntimeConfig()
-const i18n = useI18n()
-const showModal = ref(true)
+const config = useRuntimeConfig();
+const i18n = useI18n();
+const showModal = ref(true);
 
-function closeModal(){
-    showModal.value = false;
+function closeModal() {
+  showModal.value = false;
 }
 
-function stopShowingModal(){
-    localStorage.setItem('show-support-modal', "false");
-    showModal.value = false;
+function stopShowingModal() {
+  localStorage.setItem("show-support-modal", "false");
+  showModal.value = false;
 }
 
 useHead({
-    title: 'MoodHelper',
-    meta: [
-        { name: 'description', content: "MoodHelper is a mood-management assistance bot using Mistral AI." }
-    ],
-    link: [
-        { rel: 'icon', type: 'image/png', href: '/moodhelper.png' }
-    ]
-})
+  title: "MoodHelper",
+  meta: [
+    {
+      name: "description",
+      content:
+        "MoodHelper is a mood-management assistance bot using Mistral AI.",
+    },
+  ],
+  link: [{ rel: "icon", type: "image/png", href: "/moodhelper.png" }],
+});
 
 useSeoMeta({
-    title: "MoodHelper",
-    ogTitle: "MoodHelper",
-    description: "MoodHelper is a mood-management assistance bot using Mistral AI.",
-    ogDescription: "MoodHelper is a mood-management assistance bot using Mistral AI.",
-    ogImage: '/moodhelper.png',
-    twitterCard: 'summary_large_image',
-})
+  title: "MoodHelper",
+  ogTitle: "MoodHelper",
+  description:
+    "MoodHelper is a mood-management assistance bot using Mistral AI.",
+  ogDescription:
+    "MoodHelper is a mood-management assistance bot using Mistral AI.",
+  ogImage: "/moodhelper.png",
+  twitterCard: "summary_large_image",
+});
 
 onBeforeMount(() => {
-    const dontShowSupportModal = localStorage.getItem('show-support-modal')
-    if (dontShowSupportModal) showModal.value = false;
-})
+  const dontShowSupportModal = localStorage.getItem("show-support-modal");
+  if (dontShowSupportModal) showModal.value = false;
+});
 </script>
 
 <template>
-    <html data-theme="light" class="max-h-screen">
-        <NuxtLayout>
-            <dialog id="support_on_kofi_modal" :class="`modal ${showModal ? 'modal-open' : ''}`">
-                <div class="modal-box">
-                    <h3 class="font-bold text-lg">{{ $t('support-modal.title') }}</h3>
-                    <p class="py-4">{{ $t('support-modal.text') }}</p>
-                    <div class="modal-action grid grid-cols-2 items-center w-full justify-center">
-                        <a class="btn btn-primary" href="https://ko-fi.com/type32">{{ $t('support-modal.support') }}</a>
-                        <button class="btn" @click="closeModal()">{{ $t('support-modal.deny') }}</button>
-                    </div>
-                    <button class="btn btn-sm btn-ghost w-full mt-2" @click="stopShowingModal()">{{ $t('support-modal.stop-showing-modal') }}</button>
-                </div>
-            </dialog>
-            <NuxtPage/>
-
-        </NuxtLayout>
-    </html>
+  <html data-theme="light" class="max-h-screen">
+    <NuxtLayout>
+      <dialog
+        id="support_on_kofi_modal"
+        :class="`modal ${showModal ? 'modal-open' : ''}`"
+      >
+        <div class="modal-box">
+          <h3 class="font-bold text-lg">{{ $t("support-modal.title") }}</h3>
+          <p class="py-4">{{ $t("support-modal.text") }}</p>
+          <div
+            class="modal-action grid grid-cols-2 items-center w-full justify-center"
+          >
+            <a class="btn btn-primary" href="https://ko-fi.com/type32">{{
+              $t("support-modal.support")
+            }}</a>
+            <button class="btn" @click="closeModal()">
+              {{ $t("support-modal.deny") }}
+            </button>
+          </div>
+          <button
+            class="btn btn-sm btn-ghost w-full mt-2"
+            @click="stopShowingModal()"
+          >
+            {{ $t("support-modal.stop-showing-modal") }}
+          </button>
+        </div>
+      </dialog>
+      <NuxtPage />
+    </NuxtLayout>
+  </html>
 </template>
 
 <style module>
@@ -64,10 +81,10 @@ onBeforeMount(() => {
 
 .my-enter-active,
 .my-leave-active {
-    transition: opacity 0.3s;
+  transition: opacity 0.3s;
 }
 .my-enter,
 .my-leave-active {
-    opacity: 0;
+  opacity: 0;
 }
 </style>

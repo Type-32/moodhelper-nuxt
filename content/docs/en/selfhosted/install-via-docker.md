@@ -68,6 +68,7 @@ You have successfully deployed MoodHelper! Navigate to `http://localhost:3000` (
 ### 🔧 Troubleshooting
 
 Should you encounter any issues during the installation process, here are a few tips:
+
 - Ensure Docker is running on your system.
 - Check that the ports you're using are not already in use.
 - Verify that all environment variables are correctly set.

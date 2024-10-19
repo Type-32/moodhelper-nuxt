@@ -43,21 +43,21 @@ Portainer 是一款多功能容器管理工具，可以通过用户友好的 Web
 
 - **第 1 步：** 打开您的终端。
 - **第 2 步：** 通过运行以下命令拉取 MoodHelper 镜像：
-   ````
-   docker pull type32/moodhelper-nuxt：最新
-   ````
+  ```
+  docker pull type32/moodhelper-nuxt：最新
+  ```
 - **步骤 3：** 使用必要的环境变量和端口映射启动容器：
-   ````
-   docker run -d -p YOUR_EXTERNAL_PORT_HERE:3000 \
-   -e NUXT_OPENAI_API_KEY=YOUR_OPENAI_API_KEY_HERE \
-   -e NUXT_PUBLIC_API_MODEL=YOUR_ENDPOINT_MODEL_NAME_HERE \
-   -e NUXT_PUBLIC_AI_ENDPOINT=您的_CUSTOM_ENDPOINT_HERE \
-   -e NUXT_PUBLIC_SITE_URL=您的网站的S_PUBLIC_URL \
-   -e NUXT_PUBLIC_SITE_NAME=您的网站的S_PUBLIC_NAME \
-   -e NUXT_API_RATE_LIMIT=50 \
-   -e NUXT_API_WINDOW_DURATION=15 \
-   --name mudhelper type32/moodhelper-nuxt:最新
-   ````
+  ```
+  docker run -d -p YOUR_EXTERNAL_PORT_HERE:3000 \
+  -e NUXT_OPENAI_API_KEY=YOUR_OPENAI_API_KEY_HERE \
+  -e NUXT_PUBLIC_API_MODEL=YOUR_ENDPOINT_MODEL_NAME_HERE \
+  -e NUXT_PUBLIC_AI_ENDPOINT=您的_CUSTOM_ENDPOINT_HERE \
+  -e NUXT_PUBLIC_SITE_URL=您的网站的S_PUBLIC_URL \
+  -e NUXT_PUBLIC_SITE_NAME=您的网站的S_PUBLIC_NAME \
+  -e NUXT_API_RATE_LIMIT=50 \
+  -e NUXT_API_WINDOW_DURATION=15 \
+  --name mudhelper type32/moodhelper-nuxt:最新
+  ```
 
 如有必要，请将“YOUR_EXTERNAL_PORT_HERE”替换为您所需的端口映射。 确保您选择的端口已打开并且在您的网络上可用。
 
@@ -68,6 +68,7 @@ Portainer 是一款多功能容器管理工具，可以通过用户友好的 Web
 ### 🔧 故障排除
 
 如果您在安装过程中遇到任何问题，这里有一些提示：
+
 - 确保 Docker 正在您的系统上运行。
 - 检查您正在使用的端口是否尚未被使用。
 - 验证所有环境变量是否设置正确。
