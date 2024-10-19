@@ -27,45 +27,48 @@ let messages: Message[] = [{ role: "user", content: "Hello!" }];
 let awaitingResponse: boolean = false;
 let generatingResponse: boolean = false;
 let errorOccurred: boolean = false;
-let activeResponse: string = '';
+let activeResponse: string = "";
 
 // Function to handle streaming the response from the API
 async function stream() {
-    awaitingResponse = true;
-    generatingResponse = false;
-    activeResponse = ''; // Reset active response
+  awaitingResponse = true;
+  generatingResponse = false;
+  activeResponse = ""; // Reset active response
 
-    try {
-        const response = await fetch('https://moodhelper.crtl-prototype-studios.cn/api/v1/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ messages, stream: true }), // Ensure stream is true
-        });
+  try {
+    const response = await fetch(
+      "https://moodhelper.crtl-prototype-studios.cn/api/v1/chat",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages, stream: true }), // Ensure stream is true
+      },
+    );
 
-        if (!response.ok) throw new Error('Network response was not ok.');
+    if (!response.ok) throw new Error("Network response was not ok.");
 
-        const reader = response.body?.getReader();
-        if (!reader) throw new Error('Failed to get reader from response body.');
+    const reader = response.body?.getReader();
+    if (!reader) throw new Error("Failed to get reader from response body.");
 
-        awaitingResponse = false;
-        generatingResponse = true;
+    awaitingResponse = false;
+    generatingResponse = true;
 
-        // Stream the response
-        while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            activeResponse += new TextDecoder("utf-8").decode(value);
-        }
-
-        generatingResponse = false;
-        messages.push({ role: 'assistant', content: activeResponse });
-    } catch (error) {
-        errorOccurred = true;
-        generatingResponse = false;
-        console.error('An error occurred:', error);
-    } finally {
-        awaitingResponse = generatingResponse = false;
+    // Stream the response
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      activeResponse += new TextDecoder("utf-8").decode(value);
     }
+
+    generatingResponse = false;
+    messages.push({ role: "assistant", content: activeResponse });
+  } catch (error) {
+    errorOccurred = true;
+    generatingResponse = false;
+    console.error("An error occurred:", error);
+  } finally {
+    awaitingResponse = generatingResponse = false;
+  }
 }
 ```
 

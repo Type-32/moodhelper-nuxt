@@ -2,6 +2,7 @@
 title: "API Usage"
 author: "W"
 ---
+
 # MoodHelper API Usage Guide
 
 Welcome to the API Usage Guide for MoodHelper! Our API allows you to integrate MoodHelper's capabilities into your own applications, providing a seamless way to access our chatbot's responses in real-time. Below, we provide a TypeScript code snippet that demonstrates how to fetch streamed responses from the MoodHelper API, ensuring your application can interact with our service effectively.
@@ -26,45 +27,48 @@ let messages: Message[] = [{ role: "user", content: "Hello!" }];
 let awaitingResponse: boolean = false;
 let generatingResponse: boolean = false;
 let errorOccurred: boolean = false;
-let activeResponse: string = '';
+let activeResponse: string = "";
 
 // Function to handle streaming the response from the API
 async function stream() {
-    awaitingResponse = true;
-    generatingResponse = false;
-    activeResponse = ''; // Reset active response
+  awaitingResponse = true;
+  generatingResponse = false;
+  activeResponse = ""; // Reset active response
 
-    try {
-        const response = await fetch('https://moodhelper.crtl-prototype-studios.cn/api/v1/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ messages, stream: true }), // Ensure stream is true
-        });
+  try {
+    const response = await fetch(
+      "https://moodhelper.crtl-prototype-studios.cn/api/v1/chat",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages, stream: true }), // Ensure stream is true
+      },
+    );
 
-        if (!response.ok) throw new Error('Network response was not ok.');
+    if (!response.ok) throw new Error("Network response was not ok.");
 
-        const reader = response.body?.getReader();
-        if (!reader) throw new Error('Failed to get reader from response body.');
+    const reader = response.body?.getReader();
+    if (!reader) throw new Error("Failed to get reader from response body.");
 
-        awaitingResponse = false;
-        generatingResponse = true;
+    awaitingResponse = false;
+    generatingResponse = true;
 
-        // Stream the response
-        while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            activeResponse += new TextDecoder("utf-8").decode(value);
-        }
-
-        generatingResponse = false;
-        messages.push({ role: 'assistant', content: activeResponse });
-    } catch (error) {
-        errorOccurred = true;
-        generatingResponse = false;
-        console.error('An error occurred:', error);
-    } finally {
-        awaitingResponse = generatingResponse = false;
+    // Stream the response
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      activeResponse += new TextDecoder("utf-8").decode(value);
     }
+
+    generatingResponse = false;
+    messages.push({ role: "assistant", content: activeResponse });
+  } catch (error) {
+    errorOccurred = true;
+    generatingResponse = false;
+    console.error("An error occurred:", error);
+  } finally {
+    awaitingResponse = generatingResponse = false;
+  }
 }
 ```
 
@@ -74,8 +78,8 @@ async function stream() {
 - **Method:** POST
 - **Content-Type:** `application/json`
 - **Body Parameters:**
-    - `messages`: An array of message objects where each object has a `role` (`user` or `system`) and `content` (the message text).
-    - `stream`: A boolean that must be set to `true` to enable streaming responses.
+  - `messages`: An array of message objects where each object has a `role` (`user` or `system`) and `content` (the message text).
+  - `stream`: A boolean that must be set to `true` to enable streaming responses.
 
 ### 💡 Tips for Using the API
 
